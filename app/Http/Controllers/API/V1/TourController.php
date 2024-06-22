@@ -3,33 +3,20 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ToursListRequest;
 use App\Http\Resources\TourResource;
 use App\Models\Travel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class TourController extends Controller
 {
-    public function index(Travel $travel, Request $request){
+    public function index(Travel $travel, ToursListRequest $request){
        
-        try {
-            $validated = $request->validate([
-                'priceFrom' => 'nullable|numeric',
-                'priceTo' => 'nullable|numeric',
-                'dateFrom' => 'nullable|date',
-                'dateTo' => 'nullable|date',
-                'sortBy' => ['nullable', Rule::in(['price'])],
-                'sortOrder' => ['nullable', Rule::in(['asc', 'desc'])],
-            ], [
-                'sortBy.in' => "The 'sortBy' parameter accepts only the 'price' value.",
-                'sortOrder.in' => "The 'sortOrder' parameter accepts only 'asc' or 'desc' values.",
-            ]);
-        } catch (ValidationException $e) {
-            return response()->json($e->errors(), 422);
-        }
-
-
+        // try {
+           
         $tours = $travel->tours()
             ->when($request->priceFrom, function($query) use ($request){
                 $query->where('price', '>=', $request->priceFrom * 100);
@@ -50,6 +37,11 @@ class TourController extends Controller
             ->paginate();
 
         return TourResource::collection($tours);
+        // } catch (\Exception $e) {
+        //     return response()->json($e->getMessage(), 500);
+        // }
+
+
     }
 
 }

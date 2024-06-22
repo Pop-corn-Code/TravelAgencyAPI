@@ -12,7 +12,7 @@ class ToursListRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -35,8 +35,8 @@ class ToursListRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'sortBy' => "The 'sortBy' parameter accepts only the 'price' value",
-            'sortOrder' => "The 'sortBy' parameter accepts only the ",
+            'sortBy.in' => "The 'sortBy' parameter accepts only the 'price' value.",
+            'sortOrder.in' => "The 'sortOrder' parameter accepts only 'asc' or 'desc' values.",
         ];
     }
 }
