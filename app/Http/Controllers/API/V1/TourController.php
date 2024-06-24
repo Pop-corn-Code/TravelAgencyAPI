@@ -15,8 +15,6 @@ class TourController extends Controller
 {
     public function index(Travel $travel, ToursListRequest $request){
        
-        // try {
-           
         $tours = $travel->tours()
             ->when($request->priceFrom, function($query) use ($request){
                 $query->where('price', '>=', $request->priceFrom * 100);
@@ -37,11 +35,7 @@ class TourController extends Controller
             ->paginate();
 
         return TourResource::collection($tours);
-        // } catch (\Exception $e) {
-        //     return response()->json($e->getMessage(), 500);
-        // }
-
-
+       
     }
 
 }

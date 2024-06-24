@@ -35,8 +35,8 @@ class ToursListRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'sortBy.in' => "The 'sortBy' parameter accepts only the 'price' value.",
-            'sortOrder.in' => "The 'sortOrder' parameter accepts only 'asc' or 'desc' values.",
+            'sortBy' => "The 'sortBy' parameter accepts only the 'price' value.",
+            'sortOrder' => "The 'sortOrder' parameter accepts only 'asc' or 'desc' values.",
         ];
     }
 }
