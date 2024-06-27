@@ -20,22 +20,21 @@ class TourListTest extends TestCase
         $laterTour = Tour::factory()->create([
             'travel_id'=>$travel->id,
             'starting_date'=>now()->addDays(2),
-            'eding_date'=>now()->addDays(3),
+            'ending_date'=>now()->addDays(3),
         ]);
 
         $earlyTour = Tour::factory()->create([
             'travel_id'=>$travel->id,
             'starting_date'=>now(),
-            'eding_date'=>now()->addDays(1),
+            'ending_date'=>now()->addDays(1),
         ]);
 
-        $response = $this->get('api/v1/'.$travel->slug.'/tours');
+        $response = $this->get('api/v1/travels/'.$travel->slug.'/tours');
 
         $response->assertStatus(200);
         $response->assertJsonPath('data.0.id', $earlyTour->id);
         $response->assertJsonPath('data.1.id', $laterTour->id);
 
-        $response->assertStatus(200);
     }
 
     public function test_tours_list_sorts_by_price_correctly(): void
@@ -87,7 +86,7 @@ class TourListTest extends TestCase
         ]);
 
         // $endpoint = '/api/v1/'. $travel->slug .'/tours?priceFrom=10&priceTo=150';
-        $endpoint = '/api/v1/'. $travel->slug .'/tours';
+        $endpoint = '/api/v1/travels/'. $travel->slug .'/tours';
 
         // $response->assertStatus(200);
         // $response->assertJsonPath('data.0.id', $tour2->id);
@@ -123,16 +122,16 @@ class TourListTest extends TestCase
         $laterTour = Tour::factory()->create([
             'travel_id'=>$travel->id,
             'starting_date'=>now()->addDays(2),
-            'eding_date'=>now()->addDays(3),
+            'ending_date'=>now()->addDays(3),
         ]);
 
         $earlyTour = Tour::factory()->create([
             'travel_id'=>$travel->id,
             'starting_date'=>now(),
-            'eding_date'=>now()->addDays(1),
+            'ending_date'=>now()->addDays(1),
         ]);
 
-        $endpoint = '/api/v1/'. $travel->slug .'/tours';
+        $endpoint = '/api/v1/travels/'. $travel->slug .'/tours';
 
         $response = $this->get($endpoint.'?dateFrom='.now());
         $response->assertJsonCount(2, 'data');
