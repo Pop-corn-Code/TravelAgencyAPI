@@ -12,7 +12,7 @@ class TourController extends Controller
 {
     //
     public function store(Travel $travel, TourRequest $request){
-        $tour = $travel->tours()->create($request->validate());
+        $tour = $travel->tours()->create($request->validated());
 
         return new TourResource($tour);
     }
