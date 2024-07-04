@@ -15,9 +15,9 @@ A private (admin) endpoint to create new users. If you want, this could also be 
 * A public (no auth) endpoint to get a list of paginated tours by the travel slug (e.g. all the tours of the travel foo-bar). Users can filter (search) the results by priceFrom, priceTo, dateFrom (from that startingDate) and dateTo (until that startingDate). User can sort the list by price asc and desc. They will always be sorted, after every additional user-provided filter, by startingDate asc.
 ## Models
 # Users
-ID
-Email
-Password
+ID<br>
+Email<br>
+Password<br>
 Roles (M2M relationship)
 # Roles
 ID
