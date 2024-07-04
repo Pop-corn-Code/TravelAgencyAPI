@@ -28,7 +28,7 @@ class Handler extends ExceptionHandler
             //
         });
     }
-    
+
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ValidationException) {

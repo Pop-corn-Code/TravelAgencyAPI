@@ -21,12 +21,12 @@ class TourRequest extends FormRequest
      */
     public function rules(): array
     {
-            
+
         return [
             'name' => ['required'],
-            'starting_date' => ['required','date'],
-            'ending_date' => ['required','date','after:starting_date'],
-            'price' => ['required','numeric'],
+            'starting_date' => ['required', 'date'],
+            'ending_date' => ['required', 'date', 'after:starting_date'],
+            'price' => ['required', 'numeric'],
         ];
     }
 }

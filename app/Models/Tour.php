@@ -19,10 +19,11 @@ class Tour extends Model
         'price',
     ];
 
-    public function price(): Attribute{
+    public function price(): Attribute
+    {
         return Attribute::make(
-            get: fn ($value) => $value/100,
-            set: fn ($value) => $value*100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 }

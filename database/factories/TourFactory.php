@@ -18,11 +18,11 @@ class TourFactory extends Factory
     public function definition(): array
     {
         return [
-            'travel_id'=>Travel::factory(),
-            'name'=>fake()->text(20),
-            'starting_date'=>fake()->date('Y-m-d', now()),
-            'ending_date'=>fake()->date('Y-m-d',now()->addDays(5)),
-            'price'=>rand(1, 1500),
+            'travel_id' => Travel::factory(),
+            'name' => fake()->text(20),
+            'starting_date' => fake()->date('Y-m-d', now()),
+            'ending_date' => fake()->date('Y-m-d', now()->addDays(5)),
+            'price' => rand(1, 1500),
         ];
     }
 }
