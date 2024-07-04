@@ -4,7 +4,7 @@ Create a Laravel APIs application for a travel agency.
 Glossary
 Travel is the main unit of the project: it contains all the necessary information, like the number of days, the images, title, etc. An example is Japan: road to Wonder or Norway: the land of the ICE;
 Tour is a specific dates-range of a travel with its own price and details. Japan: road to Wonder may have a tour from 10 to 27 May at €1899, another one from 10 to 15 September at €669 etc. At the end, you will book a tour, not a travel.
-
+`Check the api documentation <a href="https://pop-corn-code.github.io/TravelAgencyAPI/public/docs">here</a>`
 ## Goals
 At the end, the project should have:
 A private (admin) endpoint to create new users. If you want, this could also be an artisan command, as you like. It will mainly be used to generate users for this exercise;
@@ -20,35 +20,44 @@ Email<br>
 Password<br>
 Roles (M2M relationship)
 # Roles
-ID
+ID<br>
 Name
 # Travels
-ID
-Is Public (bool)
-Slug
-Name
-Description
-Number of days
-Number of nights (virtual, computed by numberOfDays - 1)
+ID<br>
+Is Public (bool)<br>
+Slug<br>
+Name<br>
+Description<br>
+Number of days<br>
+Number of nights (virtual, computed by numberOfDays - 1)<br>
 # Tours
-ID
-Travel ID (M2O relationship)
-Name
-Starting date
-Ending date
-Price (integer, see below)
+ID<br>
+Travel ID (M2O relationship)<br>
+Name<br>
+Starting date<br>
+Ending date<br>
+Price (integer, see below)<br>
 ## Notes
-Feel free to use the native Laravel authentication.
-We use UUIDs as primary keys instead of incremental IDs, but it's not required for you to use them, although highly appreciated;
-Tours prices are integer multiplied by 100: for example, €999 euro will be 99900, but, when returned to Frontends, they will be formatted (99900 / 100);
-Tours names inside the samples are a kind-of what we use internally, but you can use whatever you want;
-Every admin user will also have the editor role;
-Every creation endpoint, of course, should create one and only one resource. You can't, for example, send an array of resource to create;
-Usage of php-cs-fixer and larastan are a plus;
-Creating docs is big plus;
-Feature tests are a big big plus.
+<ul>
+    <li>Feel free to use the native Laravel authentication.</li>
+    <li>We use UUIDs as primary keys instead of incremental IDs, but it's not required for you to use them, although highly appreciated;</li>
+    <li>
+Tours prices are integer multiplied by 100: for example, €999 euro will be 99900, but, when returned to Frontends, they will be formatted (99900 / 100);</li>
+    <li>
+Tours names inside the samples are a kind-of what we use internally, but you can use whatever you want;</li>
+    <li>
+Every admin user will also have the editor role;</li>
+    <li>
+Every creation endpoint, of course, should create one and only one resource. You can't, for example, send an array of resource to create;</li>
+    <li>
+Usage of php-cs-fixer and larastan are a plus;</li>
+    <li>
+Creating docs is big plus;</li>
+    <li>
+Feature tests are a big big plus.</li>
+</ul>
 
-########### Start
+#### --> Start
 
 In our case, it's not a web project, we have only API, so our list is even shorter:
 
