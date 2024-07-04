@@ -16,4 +16,10 @@ class TravelController extends Controller
 
         return new TravelResource($travel);
     }
+
+    public function update(Travel $travel, TravelRequest $request){
+        $travel->update($request->validated());
+
+        return new TravelResource($travel);
+    }
 }

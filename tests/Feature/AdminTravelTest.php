@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Role;
+use App\Models\Travel;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -43,7 +44,7 @@ class AdminTravelTest extends TestCase {
         $this->assertTrue( $user->roles->contains( 'name', 'admin' ) );
 
         // Attempt to create a travel record with insufficient data
-        $response = $this->actingAs($user)->postJson( '/api/v1/admin/travels', [
+        $response = $this->actingAs( $user )->postJson( '/api/v1/admin/travels', [
             'name' => 'Travel 123',
         ] );
 
@@ -64,6 +65,31 @@ class AdminTravelTest extends TestCase {
         // Fetch all travels and check if the new travel record is present
         $response = $this->get( '/api/v1/travels' );
         $response->assertJsonFragment( [ 'name' => 'Travel to Cameroon' ] );
+    }
+
+    public function test_update_travel_successfully_with_valid_data():void {
+        $this->seed( RoleSeeder::class );
+        $user = User::factory()->create();
+        $user->roles()->attach( Role::where( 'name', 'editor' )->value( 'id' ) );
+        $travel = Travel::factory()->create();
+
+        $response = $this->actingAs( $user )->putJson( '/api/v1/admin/travels/'. $travel->id, [
+            'name'=>'New name'
+        ] );
+
+        $response->assertStatus( 422 );
+        // for missing value
+
+        $response = $this->actingAs( $user )->putJson( '/api/v1/admin/travels/'. $travel->id, [
+            'name'=>'New name',
+            'description' => 'Test if the travel update or not',
+            'is_public' => true,
+            'number_of_days' => 9,
+        ] );
+
+        $response->assertStatus( 200 );
+        $response = $this->get( '/api/v1/travels' );
+        $response->assertJsonFragment( [ 'name' => 'New name' ] );
     }
 
 }
